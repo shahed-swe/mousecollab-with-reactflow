@@ -1,23 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import { useLiveCursors } from './hooks/livecursor';
+import Cursor from './components/Cursor';
+import { COLORS } from './components/Color';
+import OverviewFlow from './Flow';
 
 function App() {
+  const cursors = useLiveCursors()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <OverviewFlow/>
+      {cursors.map(({ x, y, connectionId }) => (
+        <Cursor
+          key={connectionId}
+          color={COLORS[connectionId % COLORS.length]}
+          x={x}
+          y={y}
+        />
+      ))}
     </div>
   );
 }

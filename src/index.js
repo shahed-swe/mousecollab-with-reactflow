@@ -1,13 +1,26 @@
-import React from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RoomProvider } from './liveblocks.config';
+
+
+function Index(){
+  // const cursos = useLiveCursors()
+  return(
+    <RoomProvider id="my-room-id" initialPresence={{cursor: null}}>
+      {/* <ClientSideSuspense fallback="<div>Loading...</div>"> */}
+        <App/>
+      {/* </ClientSideSuspense> */}
+    </RoomProvider>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Index />
   </React.StrictMode>
 );
 
